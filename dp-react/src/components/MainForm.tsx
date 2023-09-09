@@ -1,10 +1,20 @@
 import { useForm } from "react-hook-form";
 import { FormData } from "../services/FormRequirements";
 import { useState } from "react";
+import { Margin, usePDF } from "react-to-pdf";
+import PdfTemplate from "./PdfTemplate";
+
 
 function MainForm() {
   const [limg, setLimg] = useState("");
   const [bimg, setBimg] = useState("");
+
+  const [dataSet, setDataSet] = useState<FormData | null>(null);
+
+  const { toPDF, targetRef } = usePDF({
+    filename: "usepdf-example.pdf",
+    page: { margin: Margin.MEDIUM },
+  });
 
   const {
     register,
@@ -52,17 +62,17 @@ function MainForm() {
     WB: "West Bengal",
   };
 
-  //    function handleLimg(e) {
-  //      console.log(e.target.files);
-  //      setLimg(URL.createObjectURL(e.target.files[0]));
-  //    }
+
+if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={dataSet}/></div></div></>;
+
 
   return (
     <>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <div>
-          <label htmlFor="purposeOfLoan" className="form-label">
-            Purpose of Loan
+      <form onSubmit={handleSubmit((data) => {setDataSet(data);
+      console.log(data)})}>
+        <div className="px-5 mx-5">
+          <label htmlFor="purposeOfLoan" className="form-label mx-2 my-2">
+            <h5>Purpose of Loan</h5>
           </label>
           <select
             {...register("purposeOfLoan", { required: "this fieldrequired" })}
@@ -82,6 +92,7 @@ function MainForm() {
             <h1>this field is required</h1>
           )}
         </div>
+
         <div>
           <label htmlFor="location" className="form-label">
             Location
