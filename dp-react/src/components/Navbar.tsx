@@ -20,19 +20,7 @@ function Navbar() {
             </button>
           </div>
 
-          <div className="collapse navbar-collapse d-flex justify-content-end ">
-            <ul className="navbar-nav ">
-              <li className="nav-item  mx-2">
-                <p className="mb-0">About us</p>
-              </li>
-              <li className="nav-item mx-2">
-                <p className="mb-0">Contact us</p>
-              </li>
-              <li className="nav-item mx-2">
-                <p className="mb-0">Signup</p>
-              </li>
-            </ul>
-          </div>
+         
         </div>
       </nav>
     </>

@@ -3,6 +3,7 @@ import { FormData } from "../services/FormRequirements";
 import { useState } from "react";
 import { Margin, usePDF } from "react-to-pdf";
 import PdfTemplate from "./PdfTemplate";
+import { Button } from "./Button";
 
 
 function MainForm() {
@@ -63,15 +64,30 @@ function MainForm() {
   };
 
 
-if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={dataSet}/></div></div></>;
+if (dataSet != null) return (
+  <>
+    <span>
+      <div ref={targetRef} className="px-3 py-3 text-black bg-white">
+        <PdfTemplate rawData={dataSet} />
+        <div>
+          <Button onClick={toPDF}>Download pdf</Button>
+        </div>
+      </div>
+    </span>
+  </>
+);
 
 
   return (
     <>
-      <form onSubmit={handleSubmit((data) => {setDataSet(data);
-      console.log(data)})}>
-        <div className="px-5 mx-5">
-          <label htmlFor="purposeOfLoan" className="form-label mx-2 my-2">
+      <form
+        onSubmit={handleSubmit((data) => {
+          setDataSet(data);
+          console.log(data);
+        })}
+      >
+        <div className="px-5 mx-5 mb-5 mt-5">
+          <label htmlFor="purposeOfLoan" className="form-label mx-2 my-1">
             <h5>Purpose of Loan</h5>
           </label>
           <select
@@ -93,9 +109,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
           )}
         </div>
 
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="location" className="form-label">
-            Location
+            <h5>Location</h5>
           </label>
           <select
             {...register("location", { required: "this fieldrequired" })}
@@ -111,9 +127,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             ))}
           </select>
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="lenderRelationShip" className="form-label">
-            Relationship
+            <h5>Relationship</h5>
           </label>
           <select
             {...register("lenderRelationShip", { required: "required field" })}
@@ -129,9 +145,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <option value="others">others</option>
           </select>
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="yourName" className="form-label">
-            Your Name
+            <h5>Your Name</h5>
           </label>
           <input
             {...register("yourName", {
@@ -148,9 +164,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <p>{errors.yourName?.message}</p>
           )}
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="yourAddress" className="form-label">
-            Your Address
+            <h5>Your Address</h5>
           </label>
           <input
             {...register("yourAddress", {
@@ -167,9 +183,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-control"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="borrowerName" className="form-label">
-            Borrower Name
+            <h5>Borrower Name</h5>
           </label>
           <input
             {...register("borrowerName", {
@@ -186,9 +202,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <p>{errors.borrowerName?.message}</p>
           )}
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="borrowerAddress" className="form-label">
-            Borrower Address
+            <h5>Borrower Address</h5>
           </label>
           <input
             {...register("borrowerAddress", {
@@ -206,9 +222,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-control"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="loanAmount" className="form-label">
-            Loan Amount
+            <h5>Loan Amount</h5>
           </label>
           <input
             {...register("loanAmount", {
@@ -220,9 +236,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-control"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="interestRate" className="form-label">
-            Rate of Interest
+            <h5>Rate of Interest</h5>
           </label>
           <input
             {...register("interestRate", { required: "required field" })}
@@ -230,9 +246,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-control"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="interestCompoundedTime" className="form-label">
-            Compound Interest Interval
+            <h5>Compound Interest Interval</h5>
           </label>
           <select
             {...register("interestCompoundedTime", {
@@ -249,9 +265,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <option value="yearly">yearly</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="dateOfLending" className="form-label">
-            Date of Lending
+        <div className="px-5 mx-5 mb-5">
+          <label htmlFor="dateOfLending" className="form-label mx-3">
+            <h5>Date of Lending :</h5>
           </label>
           <input
             {...register("dateOfLending")}
@@ -259,9 +275,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-label"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="repaymentMethod" className="form-label">
-            Repayment Interval
+            <h5>Repayment Interval</h5>
           </label>
           <select
             {...register("repaymentMethod", { required: "required field" })}
@@ -276,9 +292,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <option value="others">others</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="dateOfRepayment" className="form-label">
-            Date of First Repayment
+        <div className="px-5 mx-5 mb-5">
+          <label htmlFor="dateOfRepayment" className="form-label mx-3">
+            <h5>Date of First Repayment :</h5>
           </label>
           <input
             {...register("dateOfRepayment")}
@@ -286,9 +302,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-label"
           />
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="earlyRepayment" className="form-label">
-            Early Repayment
+            <h5>Early Repayment</h5>
           </label>
           <select
             {...register("earlyRepayment", { required: "required field" })}
@@ -302,9 +318,9 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             <option value="no">no</option>
           </select>
         </div>
-        <div>
+        <div className="px-5 mx-5 mb-5">
           <label htmlFor="additionalInformation" className="form-label">
-            Additional Conditions
+            <h5> Additional Conditions</h5>
           </label>
           <input
             {...register("additionalInformation")}
@@ -312,31 +328,40 @@ if (dataSet != null) return <><div><div ref={targetRef}><PdfTemplate rawData={da
             className="form-control"
           />
         </div>
-        <div>
-          {limg && <img src={limg} width={50} height={50} />}
-          <label className="form-label">Lender e-signature</label>
-          <input
-            className="form-control"
-            {...register("lenderESign", {
-              onChange: (e) => setLimg(URL.createObjectURL(e.target.files[0])),
-            })}
-            type="file"
-            id="formFile1"
-          />
+        <div className="d-flex flex-row justify-content-around">
+          <div className="px-5 mx-5 mb-5">
+            <label className="form-label">
+              <h5>Lender e-signature</h5>
+            </label>
+            <br />
+            {limg && <img src={limg} width={150} height={90} />}
+            <input
+              className="form-control mt-2"
+              {...register("lenderESign", {
+                onChange: (e) =>
+                  setLimg(URL.createObjectURL(e.target.files[0])),
+              })}
+              type="file"
+              id="formFile1"
+            />
+          </div>
+          <div className="px-5 mx-5 mb-5">
+            <label className="form-label">
+              <h5>Borrower e-signature</h5>
+            </label><br />
+            {bimg && <img src={bimg} width={150} height={90} />}
+            <input
+              {...register("borrowerESign", {
+                onChange: (e) =>
+                  setBimg(URL.createObjectURL(e.target.files[0])),
+              })}
+              className="form-control mt-2"
+              type="file"
+              id="formFile2"
+            />
+          </div>
         </div>
-        <div>
-          {bimg && <img src={bimg} width={50} height={50} />}
-          <label className="form-label">Borrower e-signature</label>
-          <input
-            {...register("borrowerESign", {
-              onChange: (e) => setBimg(URL.createObjectURL(e.target.files[0])),
-            })}
-            className="form-control"
-            type="file"
-            id="formFile2"
-          />
-        </div>
-        <div className="">
+        <div className="px-5 mx-5 mb-5">
           <button disabled={!isValid} type="submit" className="btn btn-primary">
             Submit
           </button>
